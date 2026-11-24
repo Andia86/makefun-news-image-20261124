@@ -1,62 +1,50 @@
 # The Day in World News — Tuesday 24 November 2026
 
-[![Bounty](https://make.fun/badge/news-image-20261124.svg)](https://make.fun/bounty/news-image-20261124)
-[![Rank](https://make.fun/badge/news-image-20261124/Andia86/makefun-news-image-20261124/rank.svg)](https://make.fun/bounty/news-image-20261124/leaderboard)
-[![Reward](https://make.fun/badge/news-image-20261124/Andia86/makefun-news-image-20261124/reward.svg)](https://make.fun/bounty/news-image-20261124)
+[![bounty](https://make.fun/badge/news-image-20261124.svg)](https://make.fun/bounty/news-image-20261124)
+[![rank](https://make.fun/badge/news-image-20261124/Andia86/makefun-news-image-20261124/rank.svg)](https://make.fun/bounty/news-image-20261124)
+[![reward](https://make.fun/badge/news-image-20261124/Andia86/makefun-news-image-20261124/reward.svg)](https://make.fun/bounty/news-image-20261124)
 
-One page that sums up the world's news of **Tuesday 24 November 2026**:
-52 stories (12 illustrated leads + 40 briefs), 7 regions, every story sourced.
+One page, 52 sourced stories, all of them Tuesday's. Entry for the
+[news-image-20261124](https://make.fun/bounty/news-image-20261124)
+bounty on [make.fun](https://make.fun).
 
-## What the image shows
+## What the page does differently
 
-A flat broadsheet front page, "THE DAY IN WORLD NEWS", built to be read
-the way a picture editor reads a front page:
+- **Count first, honestly.** 12 illustrated cards plus 40 numbered
+  briefs = 52 distinct stories. No duplicates, no padding.
+- **A DATE CHECK strip on the page itself.** The biggest stories of
+  Monday 23 November — Nvidia reinstating Jensen Huang and the US
+  market surge, the Grok-image lawsuits, FIFA's 2031/2035 host votes,
+  the Merz–Rutte pledges — are named and left out on purpose. They are
+  Monday's news, not Tuesday's.
+- **Every card carries a status tag** (CONFIRMED / REPORTED /
+  OFFICIAL) and every story is dated in `NEWS_SOURCES.md` against the
+  wire reporting itself — "on Tuesday", a 24 Nov dateline or a 24 Nov
+  timestamp — never against an index page's date.
+- **Markets are split by session and labelled by day**: Asia's Tuesday
+  close (Nikkei +3.91%, Kospi +6.3%, Taiex +9%) is not dressed up as
+  America's; the US panel is printed as what it is, Monday's close.
+- **A UTC timeline with real timestamps** (00:35 Japan flash PMI,
+  01:32 the Koshi quake, 06:00 the Nikkei close, 12:03 the UK Houthi
+  designation, 13:43 the CAS ruling in Lausanne) and a map whose
+  numbered pins match the twelve cards.
+- **Rebuilt the same evening after review.** A first draft of this
+  page was caught by an independent fact-check carrying Monday
+  stories under a Tuesday banner, and was scrapped. This version was
+  re-sourced item by item against Tuesday's own reporting, then
+  re-checked by a second reviewer before submission.
 
-- **Masthead and date line** — the day is named in full: Tuesday
-  24 November 2026, with the count line "52 STORIES · 7 REGIONS · ONE PAGE".
-- **Date check strip** — every story happened or was first reported on
-  Tuesday 24 November 2026, checked against Reuters, AP, AFP and regional
-  wires carrying 24 Nov datelines and timestamps.
-- **UTC timeline** — five anchor moments of the day, from Reuters' 00:23 GMT
-  gold report and the 00:35 GMT Japan flash PMI to the closing market
-  figures (S&P 500 +4.73%, Nasdaq +6.51%, Nikkei 225 +3.91%).
-- **12 illustrated lead cards** — number chip, region · field tag, source
-  tag, a bold headline, one line of summary, and an original flat icon
-  drawn in code.
-- **"Where it happened" map** — a simplified world map with numbered pins
-  matching the 12 lead cards, beside a markets panel for the day.
-- **40 numbered briefs** — the rest of the day in a dense three-column
-  list, each with region and source tags.
-- **Footer** — the attribution rule: disputed claims are attributed to
-  their source, and the outlets used are named.
+## Files
 
-## Method and sources
-
-Stories were gathered on 24 November 2026 from major wire and world
-outlets — Reuters, AP and AFP wire copy, UN News, PINA (Pacific),
-The Japan Times, Al Jazeera, ABC Australia, The Hindu, Anadolu reporting
-and same-day live blogs — and every story had to carry a verifiable
-24 November 2026 date basis (a dateline, a publication timestamp, or a
-same-day live report). Anything that could not be dated to 24 November
-was discarded, however prominent. The full numbered list, with each
-story's source and date basis, is in [NEWS_SOURCES.md](NEWS_SOURCES.md);
-the numbers there match the numbers printed in the image.
-
-The image was drawn with PIL at 2048×2048 and downscaled to 1024×1024
-by [render.py](render.py). All artwork is original flat shapes drawn in
-code — no photographs and no external images.
+- `main.py` — entry point; writes the page to the output directory.
+- `render.py` — the deterministic renderer (pure PIL, no clock, no
+  network, no randomness; two runs give identical bytes).
+- `entry.png` — the rendered page, 1024×1024.
+- `NEWS_SOURCES.md` — the per-story source and date ledger, including
+  the drop list of Monday stories that were excluded.
 
 ## Run
 
 ```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
+python3 render.py   # regenerates entry.png in place
 ```
-
-`main.py` (Python 3.13, standard library only, no network) copies the
-committed `entry.png` into `$MAKEFUN_OUTPUT_DIR`, byte for byte, so two
-runs always produce identical bytes. The image is a 1024×1024 PNG under
-1 MiB.
-
----
-
-Built for [make.fun](https://make.fun)'s "Sum up 24 November's world news in one image" bounty.
